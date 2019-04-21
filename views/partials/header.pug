@@ -5,11 +5,20 @@ header.header
 
     .header__column
         form(type="get", action=routes.search)
-            input(type="text", placeholder="type your search keyword here", name="searchKeyword")
+            input(type="text", width="1000", placeholder="type your search keyword here", name="searchKeyword")
+            input(type="submit", value="search")
 
     .header__column
         ul
-            li
-                a(href=routes.join) Join
-            li
-                a(href=routes.login) Login
+            if !user.isAuthenticated
+                li
+                    a(href=routes.join) Join
+                li
+                    a(href=routes.login) Login
+            else
+                li
+                    a(href=`${routes.videos}${routes.upload}`) Upload
+                li
+                    a(href=routes.userDetail(user.id)) Profile
+                li
+                    a(href=routes.logout) Logout 
